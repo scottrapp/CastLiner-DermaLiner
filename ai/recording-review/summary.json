@@ -1,0 +1,81 @@
+[
+  {
+    "recording": 1,
+    "source": "4 miles- lots of cramping at around 15 min in .txt",
+    "rows": 9150,
+    "minutes": 37.25,
+    "channels": [
+      "Sensor 1",
+      "Sensor 2",
+      "Sensor 3"
+    ],
+    "median_sample_ms": 244.0,
+    "maximum_gap_ms": 814.0,
+    "missing_1s_bins": 0,
+    "units": "raw/unconfirmed",
+    "calibration": "not provided"
+  },
+  {
+    "recording": 2,
+    "source": "6 mile run, cramp at 22-23 min.txt",
+    "rows": 12679,
+    "minutes": 51.62,
+    "channels": [
+      "Sensor 2",
+      "Sensor 3"
+    ],
+    "median_sample_ms": 199.5,
+    "maximum_gap_ms": 1837.0,
+    "missing_1s_bins": 86,
+    "units": "raw/unconfirmed",
+    "calibration": "not provided"
+  },
+  {
+    "recording": 3,
+    "source": "6 mile run- good dehydration drift before 1:2 cool down walk (increase pressure).txt",
+    "rows": 15108,
+    "minutes": 61.5,
+    "channels": [
+      "Sensor 1",
+      "Sensor 2",
+      "Sensor 3"
+    ],
+    "median_sample_ms": 244.0,
+    "maximum_gap_ms": 1153.0,
+    "missing_1s_bins": 0,
+    "units": "raw/unconfirmed",
+    "calibration": "not provided"
+  },
+  {
+    "recording": 4,
+    "source": "6 mile run- strap adjustment at 20 min, then cool down at end (good dehydration drift too).txt",
+    "rows": 13448,
+    "minutes": 54.74,
+    "channels": [
+      "Sensor 1",
+      "Sensor 2",
+      "Sensor 3"
+    ],
+    "median_sample_ms": 243.0,
+    "maximum_gap_ms": 5265.0,
+    "missing_1s_bins": 26,
+    "units": "raw/unconfirmed",
+    "calibration": "not provided"
+  },
+  {
+    "recording": 5,
+    "source": "7.5 mile run empty stomach- hit wall at 55 min- loss of vascular tone.txt",
+    "rows": 16190,
+    "minutes": 65.91,
+    "channels": [
+      "Sensor 1",
+      "Sensor 2",
+      "Sensor 3"
+    ],
+    "median_sample_ms": 243.0,
+    "maximum_gap_ms": 2682.0,
+    "missing_1s_bins": 30,
+    "units": "raw/unconfirmed",
+    "calibration": "not provided"
+  }
+]

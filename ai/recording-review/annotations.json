@@ -1,0 +1,47 @@
+[
+  {
+    "recording": 1,
+    "start_seconds": 900,
+    "end_seconds": 960,
+    "reported_event": "Cramping reported around 15 min",
+    "model_label": null,
+    "confirmed": false,
+    "subject_id": null
+  },
+  {
+    "recording": 2,
+    "start_seconds": 1320,
+    "end_seconds": 1380,
+    "reported_event": "Cramp reported at 22\u201323 min",
+    "model_label": null,
+    "confirmed": false,
+    "subject_id": null
+  },
+  {
+    "recording": 3,
+    "start_seconds": null,
+    "end_seconds": null,
+    "reported_event": "Drift and cool-down reported; exact timing unconfirmed",
+    "model_label": null,
+    "confirmed": false,
+    "subject_id": null
+  },
+  {
+    "recording": 4,
+    "start_seconds": 1200,
+    "end_seconds": 1260,
+    "reported_event": "Strap adjustment reported around 20 min",
+    "model_label": null,
+    "confirmed": false,
+    "subject_id": null
+  },
+  {
+    "recording": 5,
+    "start_seconds": 3300,
+    "end_seconds": 3360,
+    "reported_event": "Reported event around 55 min",
+    "model_label": null,
+    "confirmed": false,
+    "subject_id": null
+  }
+]

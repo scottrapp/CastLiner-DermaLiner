@@ -1,0 +1,13 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {modelInput,assess,installModel} from './pressureAI.ts';
+import {medicalHistory} from './medicalRules.ts';
+const frames=Array.from({length:64},(_,i)=>({t:i*1000,z:[10+i,20,30,40]}));
+test('features agree with training pressure and delta ordering',()=>{const x=modelInput(frames); assert.equal(x.length,512);assert.ok(Math.abs(x[8]-.11)<1e-6);assert.ok(Math.abs(x[12]-.01)<1e-6);assert.equal(x[4],0);});
+test('missing timing, invalid and insufficient values reject inference',()=>{assert.equal(modelInput(frames.slice(1)),null);assert.equal(modelInput(frames.map((f,i)=>i===30?{...f,t:f.t+500}:f)),null);assert.equal(modelInput(frames.map((f,i)=>i===5?{...f,z:[NaN,0,0,0]}:f)),null);});
+test('no model, uncertain outputs and failures never pretend confirmation',()=>{installModel(null);assert.equal(assess(frames).state,'unavailable');installModel({version:'test',validated:true,run:()=>[.25,.25,.25,.25]});assert.equal(assess(frames).state,'uncertain');installModel({version:'test',validated:true,run:()=>{throw Error()}});assert.equal(assess(frames).state,'uncertain');installModel({version:'test',validated:true,run:()=>[0,.95,.03,.02]});assert.equal(assess(frames).state,'positional');installModel(null);});
+const ranges=[1,2,3,4].map(zone=>({zone,min:10,max:30}));
+const w=1800000; const history=Array.from({length:40},(_,i)=>({t:i*w/10,z:[40,20,20,20]}));
+test('two complete high segments warn; four alert',()=>{const h=medicalHistory(history,ranges,4*w);assert.equal(h.segments[1].states[0],'warning');assert.equal(h.segments[3].states[0],'high');assert.deepEqual(h.alertZones,[1]);});
+test('a green or missing segment breaks consecutive exposure',()=>{const green=history.map(f=>f.t>=w&&f.t<2*w?{...f,z:[20,20,20,20]}:f);assert.deepEqual(medicalHistory(green,ranges,4*w).alertZones,[]);assert.deepEqual(medicalHistory(history.filter(f=>f.t<w||f.t>=2*w),ranges,4*w).alertZones,[]);});
+test('incomplete segment and clustered samples do not establish two hours',()=>{assert.deepEqual(medicalHistory(history,ranges,4*w-1).alertZones,[]);const cluster=history.map((f,i)=>({...f,t:Math.floor(i/10)*w+i%10}));assert.deepEqual(medicalHistory(cluster,ranges,4*w).alertZones,[]);});

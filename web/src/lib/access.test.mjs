@@ -1,0 +1,4 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {patientRouteAllowed as allowed} from './access.ts';
+test('patient can view own profile and pressure history',()=>{assert.equal(allowed(7,'GET','/api/patients/7'),true);assert.equal(allowed(7,'GET','/api/patients/7/readings'),true);assert.equal(allowed(7,'GET','/api/auth/me'),true);});
+test('patient cannot read another patient, invite accounts, create patients or write notes',()=>{for(const [method,path] of [['GET','/api/patients/8'],['GET','/api/patients/8/readings'],['POST','/api/patients'],['POST','/api/patients/7/invite'],['POST','/api/patients/7/notes'],['GET','/api/patients/7/notes'],['POST','/api/alerts/9/resolve']])assert.equal(allowed(7,method,path),false,method+' '+path);});
+test('invalid patient identities deny access',()=>{for(const id of [0,-1,NaN,Infinity])assert.equal(allowed(id,'GET','/api/patients'),false);});
