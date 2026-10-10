@@ -102,3 +102,17 @@ CREATE TABLE IF NOT EXISTS patient_invite (
  token_hash TEXT UNIQUE NOT NULL, expires_at TIMESTAMPTZ NOT NULL,
  accepted_at TIMESTAMPTZ, revoked_at TIMESTAMPTZ, created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- Account recovery and session invalidation
+ALTER TABLE clinician ADD COLUMN IF NOT EXISTS session_version INT NOT NULL DEFAULT 0;
+ALTER TABLE patient_account ADD COLUMN IF NOT EXISTS session_version INT NOT NULL DEFAULT 0;
+CREATE TABLE IF NOT EXISTS password_reset (
+ id SERIAL PRIMARY KEY, clinician_id INT REFERENCES clinician(id) ON DELETE CASCADE,
+ patient_id INT REFERENCES patient_account(patient_id) ON DELETE CASCADE,
+ token_hash TEXT UNIQUE NOT NULL, expires_at TIMESTAMPTZ NOT NULL, used_at TIMESTAMPTZ,
+ created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+ CHECK ((clinician_id IS NOT NULL)::int + (patient_id IS NOT NULL)::int = 1)
+);
+CREATE TABLE IF NOT EXISTS password_reset_request (
+ email_hash TEXT PRIMARY KEY, requested_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);

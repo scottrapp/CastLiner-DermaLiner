@@ -29,6 +29,7 @@ if (process.argv.includes("--demo")) {
     await db.query(`INSERT INTO zone_threshold (patient_id, zone) SELECT $1, z FROM generate_series(1, 4) z`, [p.id]);
     await db.query(`INSERT INTO patient_clinician VALUES ($1, $2)`, [p.id, c.id]);
   }
+  await db.query(`INSERT INTO patient_clinician(patient_id,clinician_id) VALUES($1,$2) ON CONFLICT DO NOTHING`,[p.id,c.id]);
   await db.query(
     `INSERT INTO device (id, patient_id, battery) VALUES ('FIO-DEMO01', $1, 88)
      ON CONFLICT (id) DO UPDATE SET patient_id = EXCLUDED.patient_id`,

@@ -10,7 +10,8 @@
     "db:seed": "node --env-file-if-exists=.env db/seed.mjs",
     "simulate": "node --env-file-if-exists=.env scripts/simulate.mjs",
     "test": "node --test src/lib/*.test.mjs",
-    "test:onboarding": "node scripts/verify-onboarding.cjs"
+    "test:onboarding": "node scripts/verify-onboarding.cjs",
+    "setup:test": "node --env-file-if-exists=.env scripts/setup-test.mjs"
   },
   "dependencies": {
     "bcryptjs": "2.4.3",

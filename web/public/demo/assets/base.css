@@ -121,11 +121,3 @@ td .hi { color: var(--high); font-weight: 700; }
 
 .limb-panel svg.anatomy-map.arm { height:380px; }
 @media(max-width:600px){.limb-panel svg.anatomy-map.arm { height:280px; }}
-
-/* Account access */
-.auth-background { background: radial-gradient(ellipse at top, #30085e, #130d29); }
-.auth-background .login { border-radius:24px; padding:32px; max-width:480px; }
-.auth-options { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
-.auth-options .remember { display:flex; align-items:center; gap:8px; }
-.remember input { width:auto; }
-.demo-entry { display:block; text-align:center; border:1px solid var(--line); border-radius:8px; padding:10px; }
